@@ -8,12 +8,12 @@
 class cell{
 	public:
 		cell(std::pair<int,int>,bool status = true);
-		bool iWillSurvive();
-		void setStatus(bool status){this->status = status;}
-		bool getStatus(){return status;}
-		bool setNeigbours(std::tuple<int,int,cell*>);
-		std::array<std::tuple<int,int,cell*>,8> getNeigbours(){return neigbours;}
-		std::pair<int,int> getPosition(){return position;}
+		bool i_will_survive();
+		void set_status(bool status){this->status = status;}
+		bool get_status(){return status;}
+		bool set_neigbours(cell*);
+		std::array<std::tuple<int,int,cell*>,8> get_neigbours(){return neigbours;}
+		std::pair<int,int> get_position(){return position;}
 	private:
 		bool status;
 		std::pair<int,int> position;
