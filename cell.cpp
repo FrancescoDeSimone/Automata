@@ -1,6 +1,6 @@
 #include "cell.hpp"
 
-cell::cell(std::pair<int,int> position, bool status)
+Cell::Cell(std::pair<int,int> position, bool status)
 {
 	this->position = position;
 	std::array<std::pair<int,int>,8> neigbours_array {

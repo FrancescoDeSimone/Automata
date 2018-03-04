@@ -5,16 +5,38 @@
 #include <array>
 #include <utility>
 
-class cell{
+
+class Cell{
+
 	public:
-		cell(std::pair<int,int>,bool status = true);
+		Cell(std::pair<int,int>,bool status = true);
 		std::pair<int,int> get_position() const {return position;}
-		std::array<std::pair<int, int>, 8> get_neigbours() const {return neigbours;};
-		bool operator<(const cell& cell) const{ return position.first < cell.get_position().first && position.second < cell.get_position().second;}
-		bool operator==(const cell& cell) const{ return position.first == cell.get_position().first && position.second == cell.get_position().second;}
+		std::array<std::pair<int, int>, 8> get_neigbours() const {
+			return neigbours;
+		}
+		bool operator<(const Cell& cell) const{ 
+			return position.first < cell.get_position().first && position.second < cell.get_position().second;
+		}
+		bool operator==(const Cell& cell) const{ 
+			return position.first == cell.get_position().first && position.second == cell.get_position().second;
+		}
+		bool operator>(const Cell& cell) const{
+			return !(*this<cell);
+		}
 	private:
 		std::pair<int,int> position;
 		std::array<std::pair<int,int>,8> neigbours;
 };
+
+namespace std
+{
+    template<> struct hash<Cell>
+    {
+        std::size_t operator()(Cell const& cell) const noexcept
+        {
+			return std::hash<long long>()(((long long)cell.get_position().first)^(((long long)cell.get_position().second)<<32));
+        }
+    };
+}
 
 #endif
