@@ -1,7 +1,6 @@
 #ifndef WORLD_H
 #define WORLD_H
 
-#include <unordered_map>
 #include "cell.hpp"
 #include <vector>
 #include <unordered_set>

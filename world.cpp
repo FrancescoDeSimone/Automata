@@ -14,32 +14,28 @@ void World::play()
 	std::vector<Cell> to_delete;
 	std::unordered_set<Cell> to_add; 
 	
-	int cont=0;
 	for(auto cell:this->map){
+		int cont = 0;
 		for(auto neigbour_position:cell.get_neigbours()){
 			auto find_neigbour = this->map.find(neigbour_position);
 			if(find_neigbour != this->map.end()){
 				cont++;
 			}else{
-				to_add.insert(Cell(neigbour_position));
+				Cell add_cell(neigbour_position);
+				if(to_add.find(add_cell) == to_add.end()){
+					int count_new = 0;
+					for(auto neigbour_position:add_cell.get_neigbours()){
+						auto find_neigbour = this->map.find(neigbour_position);
+						if(find_neigbour != this->map.end())
+							count_new++;
+					}
+					if(count_new == 3)
+						to_add.insert(add_cell);
+				}
 			}
 		}
 		if(cont != 2 && cont != 3)
 			to_delete.push_back(cell);
-		cont = 0;
-	}
-
-	cont = 0;
-	for(auto cell_to_remove:to_add){
-		for(auto neigbour_position:cell_to_remove.get_neigbours()){
-			auto find_neigbour = this->map.find(neigbour_position);
-			if(find_neigbour != this->map.end())
-				cont++;
-		}
-		if(cont != 3){
-			to_delete.push_back(cell_to_remove);
-		}
-		cont = 0;
 	}
 
 	for(auto cell_to_add:to_add){
