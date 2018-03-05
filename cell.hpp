@@ -9,7 +9,7 @@
 class Cell{
 
 	public:
-		Cell(std::pair<int,int>,bool status = true);
+		Cell(std::pair<int,int>);
 		std::pair<int,int> get_position() const {return position;}
 		std::array<std::pair<int, int>, 8> get_neigbours() const {
 			return neigbours;

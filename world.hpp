@@ -8,8 +8,10 @@
 class World
 {
 	public:
+		World(){};
 		World(int x, int y);
 		void play();
+		void random_init(int x,int  y);
 		std::unordered_set<Cell> get_map() const{
 			return map;
 		}

@@ -1,6 +1,7 @@
 #include "world.hpp"
 #include <ctime>
-World::World(int x, int y)
+
+void World::random_init(int x, int y)
 {
 	std::srand(std::time(nullptr));
 	for(int i=0;i<x;i++)
@@ -9,11 +10,16 @@ World::World(int x, int y)
 				this->map.insert(Cell(std::make_pair(i,j)));
 }
 
+World::World(int x, int y)
+{
+	random_init(x,y);
+}
+
 void World::play()
 {
 	std::vector<Cell> to_delete;
 	std::unordered_set<Cell> to_add; 
-	
+
 	for(auto cell:this->map){
 		int cont = 0;
 		for(auto neigbour_position:cell.get_neigbours()){
@@ -47,5 +53,4 @@ void World::play()
 		if(find_delete != this->map.end())
 			this->map.erase(find_delete);
 	}
-	
 }
