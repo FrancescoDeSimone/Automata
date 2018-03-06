@@ -1,12 +1,10 @@
 #include "worldRender.hpp"
-#define X 1366
-#define Y 768
-#define Nx (X/2)
-#define Ny (Y/2)
 
 int main(int argc, char* argv[])
 {
-	WorldRender wr(Nx,Y);
+	if(argc != 5)
+		exit(1);
+	WorldRender wr(std::atoi(argv[1]),std::atoi(argv[2]),std::atoi(argv[3]),std::atoi(argv[4]));
 	wr.run();
 	return 0;
 }

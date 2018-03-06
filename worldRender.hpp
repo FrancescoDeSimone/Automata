@@ -6,11 +6,17 @@
 class WorldRender
 {
 	public:
-		WorldRender(int w,int h);
+		WorldRender(int, int);
+		WorldRender(int,int,int,int);
 		void run();
 	private:
-	World world;
-	sf::RenderWindow window;
+		void processEvents();
+		void update();
+		void render();
+		World world;
+		sf::RenderWindow window;
+		int widthCell = 0;
+		int heightCell = 0;
 };
 
 #endif
