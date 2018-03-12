@@ -15,8 +15,7 @@ void WorldRender<T>::processEvents()
 template<class T>
 void WorldRender<T>::render()
 {
-	window.clear();
-	sf::VertexArray cellVertex(sf::Quads,4*world.get_map().size());
+	sf::VertexArray cellVertex(sf::Quads,4*(world.get_new().size()+world.get_dead().size()));
 	int i=0;
 	for(const Cell cell:world.get_new()){
 		auto x = cell.get_position().first * widthCell; 
@@ -46,6 +45,5 @@ void WorldRender<T>::render()
 
 	window.draw(cellVertex);
 	window.display();
-	puts("render");
 }
 

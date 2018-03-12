@@ -19,12 +19,12 @@ class World
 			return to_add;	
 		}
 		std::vector<Cell> const &get_dead() const{
-			return to_remove;
+			return to_delete;
 		}
-	private:
+	protected:
 		std::unordered_set<Cell> map;
 		std::unordered_set<Cell> to_add;
-		std::vector<Cell> to_remove;
+		std::vector<Cell> to_delete;
 };
 
 #endif
