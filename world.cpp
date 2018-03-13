@@ -10,7 +10,7 @@ void World::random_init(int x, int y)
 				this->map.insert(std::make_pair(i,j));
 }
 
-World::World(int x, int y)
+World::World(int x, int y) : map(x*y)
 {
 	random_init(x,y);
 }

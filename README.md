@@ -1,2 +1,2 @@
-# golSFML
-A implementation of game of life with SFML library
+# Automata 
+A implementation of CA models with SFML library
