@@ -10,21 +10,13 @@ class World
 	public:
 		World(){};
 		World(int x, int y);
-		virtual void play() = 0;
+		void play();
 		void random_init(int x,int  y);
 		std::unordered_set<Cell> const &get_map() const{
 			return map;
 		}
-		std::unordered_set<Cell> const &get_new() const{
-			return to_add;	
-		}
-		std::vector<Cell> const &get_dead() const{
-			return to_delete;
-		}
 	protected:
 		std::unordered_set<Cell> map;
-		std::unordered_set<Cell> to_add;
-		std::vector<Cell> to_delete;
 };
 
 #endif

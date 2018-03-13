@@ -2,8 +2,8 @@
 
 void Gol::play()
 {
-	to_add.clear();
-	to_delete.clear();
+	std::unordered_set<Cell> to_add;
+	std::vector<Cell> to_delete;
 	for(const auto cell:map){
 		int cont = 0;
 		for(auto neigbour_position:cell.get_neigbours()){
