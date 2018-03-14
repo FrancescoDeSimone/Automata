@@ -7,7 +7,6 @@
 
 
 class Cell{
-
 	public:
 		Cell(std::pair<int,int>);
 		std::pair<int,int> get_position() const {return position;}

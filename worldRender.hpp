@@ -22,8 +22,6 @@ class WorldRender
 			view.reset(sf::FloatRect(-((width/2)-(number_cell_width/2)),-((height/2)-(number_cell_height/2)), width, height));
 			textView.reset(sf::FloatRect(0,0, width, height));
 			this->world.random_init(number_cell_width,number_cell_height);
-			this->widthCell = 1;
-			this->heightCell = 1;
 			if (!font.loadFromFile("font/amyn.ttf"))
 				exit(1);
 
@@ -31,7 +29,7 @@ class WorldRender
 			text.setCharacterSize(24);
 			text.setFillColor(sf::Color::Red);
 			text.setStyle(sf::Text::Bold);
-			window.setFramerateLimit(20);
+			window.setFramerateLimit(25);
 			window.setView(view);
 		}
 		void run()
@@ -52,8 +50,8 @@ class WorldRender
 		sf::RenderWindow window;
 		sf::View view;
 		sf::View textView;
-		int widthCell = 0;
-		int heightCell = 0;
+		int widthCell = 1;
+		int heightCell = 1;
 		float fps = 0;
 		sf::Font font;
 		sf::Text text;

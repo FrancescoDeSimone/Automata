@@ -13,6 +13,7 @@ Cell::Cell(std::pair<int,int> position)
 		std::make_pair(position.first,position.second+1),
 		std::make_pair(position.first-1,position.second+1)
 		};
+
 	this->neigbours = neigbours_array;
 }
 

@@ -1,5 +1,13 @@
 #include "gol.hpp"
 
+bool find_neigbour(std::pair<int,int> const &neigbour_position, std::unordered_set<Cell> const &map)
+{
+	auto find_neigbour = map.find(neigbour_position);
+	if(find_neigbour != map.end())
+		return true;
+	return false;
+}
+
 void Gol::play()
 {
 	std::unordered_set<Cell> to_add;
@@ -7,16 +15,14 @@ void Gol::play()
 	for(const auto cell:map){
 		int cont = 0;
 		for(auto neigbour_position:cell.get_neigbours()){
-			auto find_neigbour = map.find(neigbour_position);
-			if(find_neigbour != map.end()){
+			if(find_neigbour(neigbour_position,map)){
 				cont++;
 			}else{
 				Cell add_cell(neigbour_position);
 				if(to_add.find(add_cell) == to_add.end()){
 					int count_new = 0;
 					for(auto neigbour_position:add_cell.get_neigbours()){
-						auto find_neigbour = map.find(neigbour_position);
-						if(find_neigbour != map.end())
+						if(find_neigbour(neigbour_position,map))
 							count_new++;
 					}
 					if(count_new == 3)
