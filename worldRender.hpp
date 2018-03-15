@@ -19,6 +19,7 @@ class WorldRender
 		}
 		WorldRender<T>(int width,int height,int number_cell_width,int number_cell_height) : window(sf::VideoMode(width,height),"Game of life")
 		{
+
 			view.reset(sf::FloatRect(-((width/2)-(number_cell_width/2)),-((height/2)-(number_cell_height/2)), width, height));
 			textView.reset(sf::FloatRect(0,0, width, height));
 			this->world.random_init(number_cell_width,number_cell_height);
@@ -31,6 +32,8 @@ class WorldRender
 			text.setStyle(sf::Text::Bold);
 			window.setFramerateLimit(25);
 			window.setView(view);
+			cellVertex.setPrimitiveType(sf::Quads);
+			cellVertex.resize(world.get_map().size());
 		}
 		void run()
 		{
@@ -43,9 +46,11 @@ class WorldRender
 		}
 
 	private:
+		sf::VertexArray cellVertex;
 		void processEvents();
 		void update(){ world.play(); }
 		void render();
+		void addPoints(auto const &, sf::Color); 
 		T world;
 		sf::RenderWindow window;
 		sf::View view;
@@ -56,6 +61,7 @@ class WorldRender
 		sf::Font font;
 		sf::Text text;
 		sf::Clock clock;
+		bool reprint = true;
 };
 
 #include "worldRender.tpp"
