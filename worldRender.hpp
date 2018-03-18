@@ -40,7 +40,8 @@ class WorldRender
 			while(window.isOpen()){
 				processEvents();
 				render();
-				update();
+				if(!pause)
+					update();
 				fps = getFPS(clock.restart());
 			}
 		}
@@ -62,6 +63,7 @@ class WorldRender
 		sf::Text text;
 		sf::Clock clock;
 		bool reprint = true;
+		bool pause = true;
 };
 
 #include "worldRender.tpp"

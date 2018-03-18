@@ -12,6 +12,11 @@ class World
 		World(int x, int y);
 		virtual void play() = 0;
 		void random_init(int x,int  y);
+		void addCell(int x, int y)
+		{
+			map.insert(std::make_pair(x,y));
+			to_add.insert(std::make_pair(x,y));
+		}
 		std::unordered_set<Cell> const &get_map() const{
 			return map;
 		}

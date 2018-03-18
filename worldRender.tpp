@@ -47,10 +47,22 @@ void WorldRender<T>::processEvents()
 						view.zoom(1.5f);
 						reprint=true;
 					break;
+					case sf::Keyboard::Space:
+						pause = !pause;
+					break;
 				}
 			break;
 			case sf::Event::Resized:
 				reprint=true;
+			break;
+			case sf::Event::MouseButtonPressed:
+				switch(event.mouseButton.button){
+					case sf::Mouse::Left:
+						sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+						sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos,view);
+						world.addCell(worldPos.x,worldPos.y);
+					break;
+				}
 			break;
 		}
 	}
@@ -59,7 +71,6 @@ void WorldRender<T>::processEvents()
 template<class T>
 void WorldRender<T>::render()
 {
-	//forse meglio unsare un unordered_set
 	cellVertex.clear();
 
 	if(reprint){
