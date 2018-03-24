@@ -56,11 +56,14 @@ void WorldRender<T>::processEvents()
 				reprint=true;
 			break;
 			case sf::Event::MouseButtonPressed:
+				sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+				sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos,view);
 				switch(event.mouseButton.button){
 					case sf::Mouse::Left:
-						sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
-						sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos,view);
 						world.addCell(worldPos.x,worldPos.y);
+					break;
+					case sf::Mouse::Right:
+						world.removeCell(worldPos.x,worldPos.y);
 					break;
 				}
 			break;

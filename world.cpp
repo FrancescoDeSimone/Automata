@@ -14,3 +14,22 @@ World::World(int x, int y) : map(x*y)
 {
 	random_init(x,y);
 }
+
+
+void World::removeCell(int x, int y)
+{
+	to_add.clear();
+	to_delete.clear();
+	auto find_del = map.find(std::make_pair(x,y));
+	if(find_del != map.end())
+		map.erase(find_del);
+	to_delete.push_back(std::make_pair(x,y));
+}
+
+void World::addCell(int x, int y)
+{
+	to_add.clear();
+	to_delete.clear();
+	map.insert(std::make_pair(x,y));
+	to_add.insert(std::make_pair(x,y));
+}

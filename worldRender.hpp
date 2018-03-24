@@ -12,20 +12,13 @@ template <class T>
 class WorldRender
 {
 	public:
-		WorldRender<T>(int number_cell_width,int number_cell_height)
+		WorldRender<T>() : WorldRender(sf::VideoMode::getDesktopMode().width,sf::VideoMode::getDesktopMode().height){}
+		WorldRender<T>(int width, int height) : window(sf::VideoMode(width,height),"Automata")
 		{
-			sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-			WorldRender(desktop.width,desktop.height,number_cell_width,number_cell_height);
-		}
-		WorldRender<T>(int width,int height,int number_cell_width,int number_cell_height) : window(sf::VideoMode(width,height),"Game of life")
-		{
-
-			view.reset(sf::FloatRect(-((width/2)-(number_cell_width/2)),-((height/2)-(number_cell_height/2)), width, height));
+			view.reset(sf::FloatRect(0,0, width, height));
 			textView.reset(sf::FloatRect(0,0, width, height));
-			this->world.random_init(number_cell_width,number_cell_height);
 			if (!font.loadFromFile("font/amyn.ttf"))
 				exit(1);
-
 			text.setFont(font);
 			text.setCharacterSize(24);
 			text.setFillColor(sf::Color::Red);
@@ -33,6 +26,12 @@ class WorldRender
 			window.setFramerateLimit(25);
 			window.setView(view);
 			cellVertex.setPrimitiveType(sf::Quads);
+		}
+		WorldRender<T>(int width,int height,int number_cell_width,int number_cell_height) : WorldRender(width,height) 
+		{
+
+			//view.reset(sf::FloatRect(-((width/2)-(number_cell_width/2)),-((height/2)-(number_cell_height/2)), width, height));
+			this->world.random_init(number_cell_width,number_cell_height);
 			cellVertex.resize(world.get_map().size());
 		}
 		void run()

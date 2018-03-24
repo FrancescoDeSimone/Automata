@@ -10,8 +10,6 @@ bool find_neigbour(std::pair<int,int> const &neigbour_position, std::unordered_s
 
 void Gol::play()
 {
-	//std::unordered_set<Cell> to_add;
-	//std::vector<Cell> to_delete;
 	to_add.clear();
 	to_delete.clear();
 	for(const auto cell:map){
