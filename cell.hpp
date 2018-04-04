@@ -1,18 +1,15 @@
 #ifndef CELL_H
-#define CELLH
+#define CELL_H
 
 #include <map>
 #include <array>
 #include <utility>
-
-
 class Cell{
 	public:
-		Cell(std::pair<int,int>);
-		std::pair<int,int> get_position() const {return position;}
-		std::array<std::pair<int, int>, 8> get_neigbours() const {
-			return neigbours;
+		Cell(std::pair<int,int> position){
+			this->position = position;
 		}
+		std::pair<int,int> const &get_position() const {return position;}
 		bool operator<(const Cell& cell) const{ 
 			return position.first < cell.get_position().first && position.second < cell.get_position().second;
 		}
@@ -24,7 +21,6 @@ class Cell{
 		}
 	private:
 		std::pair<int,int> position;
-		std::array<std::pair<int,int>,8> neigbours;
 };
 
 namespace std

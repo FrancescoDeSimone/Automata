@@ -1,8 +1,7 @@
-#include <iostream>
 template<class T>
 void WorldRender<T>::addPoints(auto const &map, sf::Color color)
 {
-	for(const Cell cell:map){
+	for(const auto cell:map){
 		auto x = cell.get_position().first * widthCell; 
 		auto y = cell.get_position().second * heightCell; 
 		cellVertex.append(sf::Vertex(sf::Vector2f(x,y),color));
@@ -60,10 +59,10 @@ void WorldRender<T>::processEvents()
 				sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos,view);
 				switch(event.mouseButton.button){
 					case sf::Mouse::Left:
-						world.addCell(worldPos.x,worldPos.y);
+						world.add_cell(worldPos.x,worldPos.y);
 					break;
 					case sf::Mouse::Right:
-						world.removeCell(worldPos.x,worldPos.y);
+						world.remove_cell(worldPos.x,worldPos.y);
 					break;
 				}
 			break;

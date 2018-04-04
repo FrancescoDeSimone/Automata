@@ -5,28 +5,19 @@
 #include <vector>
 #include <unordered_set>
 
+template<typename T>
 class World
 {
+	static_assert(std::is_base_of<Cell, T>::value, "T must inherit from Cell");
 	public:
-		World(){};
-		World(int x, int y);
 		virtual void play() = 0;
-		void random_init(int x,int  y);
-		void addCell(int x, int y);
-		void removeCell(int x, int y);
-		std::unordered_set<Cell> const &get_map() const{
-			return map;
-		}
-		std::unordered_set<Cell> const &get_new() const{
-			return to_add;
-		}
-		std::vector<Cell> const &get_dead() const{
-			return to_delete;
-		}
-	protected:
-		std::unordered_set<Cell> map;
-		std::unordered_set<Cell> to_add;
-		std::vector<Cell> to_delete;
+		virtual void random_init(int x,int  y) = 0;
+		virtual void add_cell(int x, int y) = 0;
+		virtual void remove_cell(int x, int y) = 0;
+		//ty iron-man
+		virtual std::unordered_set<T> const &get_map() const = 0;
+		virtual std::unordered_set<T> const &get_new() const = 0;
+		virtual std::vector<T> const &get_dead() const = 0;
 };
 
 #endif

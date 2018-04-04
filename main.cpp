@@ -1,5 +1,6 @@
 #include "worldRender.hpp"
 #include "gol.hpp"
+#include <iostream>
 int main(int argc, char* argv[])
 {
 	if(argc == 5){
@@ -12,5 +13,16 @@ int main(int argc, char* argv[])
 		WorldRender<Gol> wr;
 		wr.run();
 	}
+	
+	/*
+	Gol g;
+	std::cout<<g.get_map().size()<<std::endl;
+	g.add_cell(10,10);
+	std::cout<<g.get_map().size()<<std::endl;
+	g.add_cell(11,10);
+	std::cout<<g.get_map().size()<<std::endl;
+	g.add_cell(12,10);
+	std::cout<<g.get_map().size()<<std::endl;
+	*/
 	return 0;
 }
