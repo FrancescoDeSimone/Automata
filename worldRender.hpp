@@ -23,15 +23,14 @@ class WorldRender
 			text.setCharacterSize(24);
 			text.setFillColor(sf::Color::Red);
 			text.setStyle(sf::Text::Bold);
-			window.setFramerateLimit(25);
+			window.setFramerateLimit(60);
 			window.setView(view);
 			cellVertex.setPrimitiveType(sf::Quads);
 		}
 		WorldRender<T>(int width,int height,int number_cell_width,int number_cell_height) : WorldRender(width,height) 
 		{
 
-			//view.reset(sf::FloatRect(-((width/2)-(number_cell_width/2)),-((height/2)-(number_cell_height/2)), width, height));
-			this->world.random_init(number_cell_width,number_cell_height);
+			this->world.random_init(width,height,number_cell_width,number_cell_height);
 			cellVertex.resize(world.get_map().size());
 		}
 		void run()

@@ -19,7 +19,7 @@ class Cell{
 		bool operator>(const Cell& cell) const{
 			return !(*this<cell);
 		}
-	private:
+	protected:
 		std::pair<int,int> position;
 };
 

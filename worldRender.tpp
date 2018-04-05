@@ -1,13 +1,18 @@
 template<class T>
 void WorldRender<T>::addPoints(auto const &map, sf::Color color)
 {
-	for(const auto cell:map){
-		auto x = cell.get_position().first * widthCell; 
-		auto y = cell.get_position().second * heightCell; 
-		cellVertex.append(sf::Vertex(sf::Vector2f(x,y),color));
-		cellVertex.append(sf::Vertex(sf::Vector2f(x+widthCell,y),color));
-		cellVertex.append(sf::Vertex(sf::Vector2f(x+widthCell,y+heightCell),color));
-		cellVertex.append(sf::Vertex(sf::Vector2f(x,y+heightCell),color));
+	#pragma omp parallel
+	#pragma omp for
+	{
+		#pragma omp for
+		for(const auto cell:map){
+			auto x = cell.get_position().first * widthCell; 
+			auto y = cell.get_position().second * heightCell; 
+			cellVertex.append(sf::Vertex(sf::Vector2f(x,y),color));
+			cellVertex.append(sf::Vertex(sf::Vector2f(x+widthCell,y),color));
+			cellVertex.append(sf::Vertex(sf::Vector2f(x+widthCell,y+heightCell),color));
+			cellVertex.append(sf::Vertex(sf::Vector2f(x,y+heightCell),color));
+		}
 	}
 }
 

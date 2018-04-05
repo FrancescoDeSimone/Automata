@@ -1,10 +1,11 @@
 #include "worldRender.hpp"
 #include "gol.hpp"
+#include "langton_ant.hpp"
 #include <iostream>
 int main(int argc, char* argv[])
 {
 	if(argc == 5){
-		WorldRender<Gol> wr(std::atoi(argv[1]),std::atoi(argv[2]),std::atoi(argv[3]),std::atoi(argv[4]));
+		WorldRender<Langton_ant> wr(std::atoi(argv[1]),std::atoi(argv[2]),std::atoi(argv[3]),std::atoi(argv[4]));
 		wr.run();
 	}else if(argc == 3){
 		WorldRender<Gol> wr(std::atoi(argv[1]),std::atoi(argv[2]));

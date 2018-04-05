@@ -12,6 +12,7 @@ class World
 	public:
 		virtual void play() = 0;
 		virtual void random_init(int x,int  y) = 0;
+		virtual void random_init(int width_screen, int height_screen, int x,int  y) = 0;
 		virtual void add_cell(int x, int y) = 0;
 		virtual void remove_cell(int x, int y) = 0;
 		//ty iron-man
