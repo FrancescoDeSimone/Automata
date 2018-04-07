@@ -6,9 +6,16 @@ class Langton_ant : public World<Cell>
 {
 	public:
 		void play() override;
-		void random_init(int x,int  y) override {random_init(0,0,x,y);};
+		void random_init(int x,int  y) override {
+			random_init(0,0,x,y);
+		}
+
 		void random_init(int width_screen, int height_screen, int x,int  y) override;
-		void add_cell(int x, int y) override{ants.push_back(std::make_pair(x,y));};
+		
+		void add_cell(int x, int y) override{
+			ants.push_back(std::make_pair(x,y));
+		}
+
 		void remove_cell(int x, int y) override;
 		std::unordered_set<Cell> const &get_map() const override{
 			return map;
@@ -30,7 +37,7 @@ void Langton_ant::random_init(int width_screen, int heigth_screen, int x, int y)
 	for(int i=0;i<x;i++)
 		for(int j=0;j<y;j++)
 			if(rand()%8==0)
-				ants.push_back(std::make_pair(i,j));
+				add_cell(i,j);
 }
 
 
@@ -50,11 +57,13 @@ void Langton_ant::play(){
 	for(auto& ant:ants){
 		auto find_path = map.find(ant.get_position());
 		if( find_path == map.end() ){
-			map.insert(Cell(ant.get_position()));
-			to_add.insert(Cell(ant.get_position()));
+			Cell c(ant.get_position(),ant.get_color());
+			map.insert(c);
+			to_add.insert(c);
 		}else{
 			map.erase(find_path);
-			to_delete.push_back(Cell(ant.get_position()));
+			Cell c(ant.get_position(),std::make_tuple(0,0,0));
+			to_delete.push_back(c);
 		}
 		std::pair<int,int> position;
 		int x = ant.get_position().first;

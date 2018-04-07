@@ -74,12 +74,8 @@ void Gol::play()
 {
 	to_add.clear();
 	to_delete.clear();
-	#pragma omp parallel
-	#pragma omp for
-	for(const auto cell:map){
+	for(const auto& cell:map){
 		int cont = 0;
-		#pragma omp parallel
-		#pragma omp for
 		for(auto neigbour_position:cell.get_neighbours()){
 			if(find_neigbour(neigbour_position,map)){
 				cont++;
@@ -100,15 +96,12 @@ void Gol::play()
 			to_delete.push_back(cell);
 	}
 
-	#pragma omp parallel 
-	#pragma omp for
 	for(const auto cell_to_add:to_add){
 		map.insert(cell_to_add);
 	}
 
-	#pragma omp parallel 
-	#pragma omp for
-	for(const auto pos_to_delete:to_delete){
+	for(auto& pos_to_delete:to_delete){
+		pos_to_delete.set_color(std::make_tuple(0,0,0));
 		auto find_delete = map.find(pos_to_delete);
 		if(find_delete != map.end())
 			map.erase(find_delete);

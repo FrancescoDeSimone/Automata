@@ -6,7 +6,8 @@
 #include <utility>
 class Cell{
 	public:
-		Cell(std::pair<int,int> position){
+		Cell(std::pair<int,int> position, std::tuple<int,int,int> color = std::make_tuple(0,255,0)){
+			this->color = color;
 			this->position = position;
 		}
 		std::pair<int,int> const &get_position() const {return position;}
@@ -19,8 +20,15 @@ class Cell{
 		bool operator>(const Cell& cell) const{
 			return !(*this<cell);
 		}
+		std::tuple<int,int,int> const &get_color() const{
+			return color;
+		}
+		void set_color(std::tuple<int,int,int> color){
+			this->color = color;
+		}
 	protected:
 		std::pair<int,int> position;
+		std::tuple<int,int,int> color;
 };
 
 namespace std

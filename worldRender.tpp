@@ -1,18 +1,15 @@
+#include <iostream>
 template<class T>
-void WorldRender<T>::addPoints(auto const &map, sf::Color color)
+void WorldRender<T>::addPoints(auto const &map)
 {
-	#pragma omp parallel
-	#pragma omp for
-	{
-		#pragma omp for
-		for(const auto cell:map){
-			auto x = cell.get_position().first * widthCell; 
-			auto y = cell.get_position().second * heightCell; 
-			cellVertex.append(sf::Vertex(sf::Vector2f(x,y),color));
-			cellVertex.append(sf::Vertex(sf::Vector2f(x+widthCell,y),color));
-			cellVertex.append(sf::Vertex(sf::Vector2f(x+widthCell,y+heightCell),color));
-			cellVertex.append(sf::Vertex(sf::Vector2f(x,y+heightCell),color));
-		}
+	for(const auto cell:map){
+		auto color = sf::Color(std::get<0>(cell.get_color()),std::get<1>(cell.get_color()),std::get<2>(cell.get_color()));
+		auto x = cell.get_position().first * widthCell; 
+		auto y = cell.get_position().second * heightCell; 
+		cellVertex.append(sf::Vertex(sf::Vector2f(x,y),color));
+		cellVertex.append(sf::Vertex(sf::Vector2f(x+widthCell,y),color));
+		cellVertex.append(sf::Vertex(sf::Vector2f(x+widthCell,y+heightCell),color));
+		cellVertex.append(sf::Vertex(sf::Vector2f(x,y+heightCell),color));
 	}
 }
 
@@ -82,11 +79,11 @@ void WorldRender<T>::render()
 
 	if(reprint){
 		window.clear();
-		addPoints(world.get_map(),sf::Color::Green);
+		addPoints(world.get_map());
 		reprint = false;
 	}else{
-		addPoints(world.get_new(),sf::Color::Green);
-		addPoints(world.get_dead(),sf::Color::Black);
+		addPoints(world.get_new());
+		addPoints(world.get_dead());
 	}
 	window.setView(view);
 	window.draw(cellVertex);

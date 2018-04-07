@@ -23,7 +23,7 @@ class WorldRender
 			text.setCharacterSize(24);
 			text.setFillColor(sf::Color::Red);
 			text.setStyle(sf::Text::Bold);
-			window.setFramerateLimit(60);
+			window.setFramerateLimit(25);
 			window.setView(view);
 			cellVertex.setPrimitiveType(sf::Quads);
 		}
@@ -49,7 +49,7 @@ class WorldRender
 		void processEvents();
 		void update(){ world.play(); }
 		void render();
-		void addPoints(auto const &, sf::Color); 
+		void addPoints(auto const &); 
 		T world;
 		sf::RenderWindow window;
 		sf::View view;
