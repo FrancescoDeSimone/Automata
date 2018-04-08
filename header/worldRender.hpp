@@ -64,5 +64,5 @@ class WorldRender
 		bool pause = true;
 };
 
-#include "worldRender.tpp"
+#include "../source/worldRender.tpp"
 #endif

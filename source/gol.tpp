@@ -1,38 +1,3 @@
-#ifndef GOL_H
-#define GOL_H
-
-#include "world.hpp"
-#include "gol_cell.hpp"
-#include <ctime>
-
-class Gol : public World<Gol_cell>
-{
-    public:
-	Gol(){}
-	Gol(int x, int y) : map(x*y)
-        {
-            random_init(x,y);
-        }
-	void play() override;
-	void random_init(int x,int  y) override {random_init(0,0,x,y);}
-	void random_init(int width_screen, int height_screen, int x, int  y) override;
-	void add_cell(int x, int y) override;
-	void remove_cell(int x, int y) override;
-	std::unordered_set<Gol_cell> const &get_map() const override{
-		return map;
-	}
-	std::unordered_set<Gol_cell> const &get_new() const override{
-		return to_add;
-	}
-	std::vector<Gol_cell> const &get_dead() const override{
-		return to_delete;
-	}
-    private:
-	std::unordered_set<Gol_cell> map;
-	std::unordered_set<Gol_cell> to_add;
-	std::vector<Gol_cell> to_delete;
-};
-
 void Gol::random_init(int width_screen, int height_screen, int x, int y){
     srand(std::time(nullptr));
     int offset_X = (width_screen/2)-(x/2);
@@ -50,7 +15,9 @@ void Gol::remove_cell(int x, int y)
 	auto find_del = map.find(std::make_pair(x,y));
 	if(find_del != map.end())
 		map.erase(find_del);
-	to_delete.push_back(std::make_pair(x,y));
+	Gol_cell c(std::make_pair(x,y));
+	c.set_color(std::make_tuple(0,0,0));
+	to_delete.push_back(c);
 }
 
 void Gol::add_cell(int x, int y)
@@ -108,5 +75,3 @@ void Gol::play()
 	}
 }
 
-
-#endif

@@ -1,38 +1,3 @@
-#ifndef LANGTON_ANT_HPP
-#define LANGTON_ANT_HPP
-#include "ant.hpp"
-#include "world.hpp"
-class Langton_ant : public World<Cell>
-{
-	public:
-		void play() override;
-		void random_init(int x,int  y) override {
-			random_init(0,0,x,y);
-		}
-
-		void random_init(int width_screen, int height_screen, int x,int  y) override;
-		
-		void add_cell(int x, int y) override{
-			ants.push_back(std::make_pair(x,y));
-		}
-
-		void remove_cell(int x, int y) override;
-		std::unordered_set<Cell> const &get_map() const override{
-			return map;
-		}
-		std::unordered_set<Cell> const &get_new() const override{
-			return to_add;	
-		}
-		std::vector<Cell> const &get_dead() const override{
-			return to_delete;
-		}
-	private:
-		std::vector<Ant> ants;
-		std::unordered_set<Cell> map;
-		std::unordered_set<Cell> to_add;
-		std::vector<Cell> to_delete;
-};
-
 void Langton_ant::random_init(int width_screen, int heigth_screen, int x, int y){
 	for(int i=0;i<x;i++)
 		for(int j=0;j<y;j++)
@@ -48,7 +13,7 @@ void Langton_ant::remove_cell(int x, int y)
 	auto find_del = map.find(std::make_pair(x,y));
 	if(find_del != map.end())
 		map.erase(find_del);
-	to_delete.push_back(std::make_pair(x,y));
+	to_delete.push_back(Cell(std::make_pair(x,y),std::make_tuple(0,0,0)));
 }
 
 void Langton_ant::play(){
@@ -93,4 +58,3 @@ void Langton_ant::play(){
 }
 
 
-#endif
