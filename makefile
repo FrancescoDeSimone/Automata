@@ -1,6 +1,6 @@
 CC = g++
 LIBRARY = -lsfml-graphics -lsfml-window -lsfml-system 
-OPTIMIZATION = -O2 -march=native -mtune=native
+OPTIMIZATION = -Ofast -march=native -mtune=native
 
 all: Automata ant.o main.o clean
 
